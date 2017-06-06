@@ -33,8 +33,11 @@ public class ManagerController extends DefaultController {
 
         if(contextManagerWebMonitoring != null){
             for(Map.Entry<String,ContextAPIConfig> appGoal: contextManagerWebMonitoring.getGoalsByApp().entrySet()){
-                Set<ContextAPIEnum> g = appGoal.getValue().getConfig();
-                result.put(appGoal.getKey(), g.toString());
+                ObjectNode temp = json.newObject();
+                temp.put("app-name", appGoal.getKey());
+                temp.putArray("ctxt-api-config");
+                temp.set("ctxt-api-config", json.toJson(appGoal.getValue()));
+                result.withArray("app-goals").add(temp);
             }
         }
 
@@ -54,11 +57,14 @@ public class ManagerController extends DefaultController {
                     entities.put(creatorName, contextManagerWebMonitoring.getInstancesByCreator(creatorName).toString());
                 }
                 if(entities.size()!=0){
-                    entityProviders.put(entityProviderSetEntry.getKey().getName(),entities);
+                    String provider = entityProviderSetEntry.getKey().getName();
+                    entityProviders.putObject(provider);
+                    entityProviders.set(provider, entities);
                 }
             }
         }
-        result.put("Entities", entityProviders);
+        result.putObject("Entities");
+        result.set("Entities", entityProviders);
 
         if(contextManagerWebMonitoring != null){
             for(Map.Entry<RelationProvider, Set<String>> relationProviderSetEntry: contextManagerWebMonitoring.getResourceCreatorsByRelationProvider().entrySet()){
@@ -67,11 +73,14 @@ public class ManagerController extends DefaultController {
                     relations.put(creator, contextManagerWebMonitoring.getInstancesByCreator(creator).toString());
                 }
                 if(relations.size()!=0){
-                    relationProviders.put(relationProviderSetEntry.getKey().getName(),relations);
+                    String provider = relationProviderSetEntry.getKey().getName();
+                    relationProviders.putObject(provider);
+                    relationProviders.set(provider, relations);
                 }
             }
         }
-        result.put("Relations", relationProviders);
+        result.putObject("Relations");
+        result.set("Relations", relationProviders);
 
         return ok(result);
     }
@@ -89,11 +98,14 @@ public class ManagerController extends DefaultController {
                     entities.put(creator, contextManagerWebMonitoring.getInstancesByCreator(creator).toString());
                 }
                 if(entities.size()!=0){
-                    entityProviders.put(entityProviderSetEntry.getKey().getName(),entities);
+                    String provider = entityProviderSetEntry.getKey().getName();
+                    entityProviders.putObject(provider);
+                    entityProviders.set(provider, entities);
                 }
             }
         }
-        result.put("Entities:", entityProviders);
+        result.putObject("Entities");
+        result.set("Entities", entityProviders);
 
         if(contextManagerWebMonitoring != null){
             for(Map.Entry<RelationProvider, Set<String>> relationProviderSetEntry: contextManagerWebMonitoring.getAbstractionCreatorsByRelationProvider().entrySet()){
@@ -102,11 +114,14 @@ public class ManagerController extends DefaultController {
                     relations.put(creator, contextManagerWebMonitoring.getInstancesByCreator(creator).toString());
                 }
                 if(relations.size()!=0){
-                    relationProviders.put(relationProviderSetEntry.getKey().getName(),relations);
+                    String provider = relationProviderSetEntry.getKey().getName();
+                    relationProviders.putObject(provider);
+                    relationProviders.set(provider, relations);
                 }
             }
         }
-        result.put("Relations:", relationProviders);
+        result.putObject("Relations");
+        result.set("Relations", relationProviders);
 
         return ok(result);
     }
@@ -118,7 +133,7 @@ public class ManagerController extends DefaultController {
 
         if(contextManagerWebMonitoring != null){
             for(String filter: contextManagerWebMonitoring.getCurrentLookupFilter()){
-                result.put(filter, true);
+                result.withArray("filters").add(filter);
             }
         }
 

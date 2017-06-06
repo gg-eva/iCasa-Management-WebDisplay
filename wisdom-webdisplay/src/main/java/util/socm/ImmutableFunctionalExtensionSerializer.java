@@ -8,10 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.liglab.adele.cream.administration.api.ImmutableContextState;
 import fr.liglab.adele.cream.administration.api.ImmutableFunctionalExtension;
-import org.apache.felix.ipojo.annotations.Component;
-import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.annotations.Service;
-import org.wisdom.api.content.Json;
 
 import java.io.IOException;
 
