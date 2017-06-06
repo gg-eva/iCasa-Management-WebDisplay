@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.liglab.adele.icasa.management.webdisplay</groupId>
+    <artifactId>icasa.management.webdisplay</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>iCasa Management Web Display</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <icasa.version>1.2.7-SNAPSHOT</icasa.version>
+        <wisdom.version>0.9.0</wisdom.version>
+        <cream.version>0.1-SNAPSHOT</cream.version>
+    </properties>
+
+    <modules>
+        <module>wisdom-webdisplay</module>
+    </modules>
+
+</project>

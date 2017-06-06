@@ -1,0 +1,15 @@
+# Eclipse and IntelliJ files
+
+*.iml
+.idea
+.project
+.settings
+.classpath
+
+# maven folders
+
+target
+felix-cache
+
+# other folders
+bin
