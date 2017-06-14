@@ -1,0 +1,238 @@
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#515151;
+	min-width:600px;    	/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+}
+/*a {
+	color:#369;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}*/
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
+}
+svg { 
+	position:fixed; 
+	height:100%; 
+	width:100% }
+/*circle:hover{
+	stroke:blue;
+	stroke-width:4;
+}*/
+
+/* Header styles */
+#header {
+	z-index:4;
+	position:fixed;
+    top:0px;
+	clear:both;
+	float:left;
+	width:100%;
+	height:5.5em;
+	border-bottom:1px solid #000;
+	background:#FFFFFF;
+}
+
+#header p,
+#header h1,
+#header h2 {
+	font-family: 'Poiret One', cursive;
+	padding:.4em 15px 0 15px;
+	margin:0;
+}
+#header div #mainNav{
+	clear:left;
+	float:left;
+	width:100%;
+	list-style:none;
+	margin:10px 0 0 0;
+	padding:0;
+}
+#header ul li{
+	display:inline;
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+#mainNav a {
+	display:block;
+	float:left;
+	margin:0 0 0 1px;
+	padding:3px 10px;
+	text-align:center;
+	background:#eee;
+	color:#000;
+	text-decoration:none;
+	position:relative;
+	left:15px;
+	line-height:1.3em;
+	transition:all 0.5s ease;
+}
+#mainNav a:hover {
+	background:#369;
+	color:#fff;
+}
+#mainNav a.active,
+#mainNav a.active:hover {
+	color:#fff;
+	background:#000;
+	font-weight:bold;
+}
+#mainNava span {
+	display:block;
+}
+/* 'widths' sub menu */
+#menuoptions {
+	clear:both;
+	background:#eee;
+	height:2em;
+	border-top:4px solid #000;
+	margin:0;
+	padding:6px 15px !important;
+	text-align:right;
+	background:#FEA621;
+}
+#content{
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+	//background:#ffffff;
+	padding:1em;
+	margin:1em;
+	top:9em;
+}
+#runtime circle{
+	transition:all 0.5s ease;
+}
+#runtime circle:hover{
+	/*stroke:green;
+	stroke-width:4;*/
+	fill:#000000;
+	stroke: #ffffff;
+}
+#services{
+	cursor: pointer;
+}
+#services circle{
+	fill: #80c41c;
+	stroke: #111111;
+	stroke-width:1.5px;
+	transition:all 0.5s ease;
+}
+#services circle:hover{
+	fill:#ffffff;
+	stroke: #ffffff;
+}
+#services text{
+	font-family:'Poiret One', cursive;
+	fill:white;
+	background-color: yellow;
+}
+#services .link{
+	fill:none;
+	stroke: #948DC2;
+	stroke-width=1.5px;
+}
+#services .g{
+	color: green;
+}
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	height:100%;
+	overflow:hidden;		/* This chops off any overhanging divs */
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+	float:left;
+	width:100%;
+	position:relative;
+}
+.infopanel{
+	z-index:1;
+	height:30em;
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+	background:#f4f4f4;
+	padding:1em;
+	margin:1em;
+}
+.col1,
+.col3 {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+}
+/* 2 Column (left menu) settings */
+.leftmenu {
+	background:#515151;		/* right column background colour */
+	top:8.5em;
+	bottom: 2em;
+}
+.leftmenu .colleft {
+	right:75%;			/* right column width */
+	/*background:#f4f4f4;	*//* left column background colour */
+}
+.leftmenu .col1 {
+	width:71%;			/* right column content width */
+	left:102%;			/* 100% plus left column left padding */
+	bottom:0;
+}
+.leftmenu  .infopanel{
+	width:21%;			/* left column content width (column width minus left and right padding) */
+	left:6%;			/* (right column left and right padding) plus (left column left padding) */
+}
+
+.idtitle{
+	position:relative;
+	width:60%;
+	background:#2179FE;
+	font-size: 100%;
+	padding:1em;
+	color:white;
+}
+.functionalExtensions li a{
+	display:inline-block;
+	padding-left:0.5em;
+	padding-right:0.5em;
+	background:#FFD6B5;
+}
+
+/* Footer styles */
+#footer {
+	z-index:3;
+	position:fixed;
+    bottom:0px;
+    right:0px;
+	clear:both;
+	float:left;
+	width:100%;
+	border-top:1px solid #000;
+	background:#FFFFFF;
+}
+#footer p {
+	padding:10px;
+	margin:0;
+}
