@@ -5,20 +5,60 @@
         <title>iCasa Network Status</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="/assets/js/grp.v1.js"></script>
         <script src="/assets/js/jquery-3.1.1.min.js"></script>
+        <script src="/assets/js/d3.v4.min.js"></script>
         <link rel="stylesheet" href="/assets/css/test.css" media="screen"/>
     </head>
+    <style>
+
+        html, body { margin:0; padding:0; overflow:hidden }
+        svg { position:fixed; top:0; left:0; height:100%; width:100% }
+        circle:hover{
+            stroke:black;
+            stroke-width:4;
+        }
+        .a{
+            font-size:1em;
+            font-family: 'Poiret One', cursive;
+        }
+        .b{
+            font-size:0.5em;
+            fill:blue;
+            font-family: 'Poiret One', cursive;
+        }
+
+    </style>
     <body>
         <div class="container">
             <h1>Test page</h1>
 
         </div>
-
+        <a href="#runtime" class="active">Runtime</a>
 
             <svg>
             <circle cx="60" cy="60" r="30" style="fill:red;" stroke="black" stroke-width="3"></circle>
                 <rect x="90" y="30" width="200" height="60" fill="rgba(100,5,100,0.5)"></rect>
                 </svg>
         <script src="/assets/js/erase.js"></script>
+        <script>
+            //circle.style("fill", "steelblue");
+            //circle.attr("r",30);
+
+            function square(){
+                console.log("i'm the king of the world!!");
+                var svg = d3.select("body").append("svg");
+
+                svg.attr("width", 500);
+
+                var rect = svg.append("rect")
+                    .attr("x", 50)
+                    .attr("y", 50)
+                    .attr("width", 200)
+                    .attr("height", 200)
+                    .attr("fill", "rgba(0,255,0,0.5)");
+            }
+            square();
+        </script>
     </body>
 </html>
