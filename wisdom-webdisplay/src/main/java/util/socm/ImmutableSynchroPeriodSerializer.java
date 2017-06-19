@@ -11,6 +11,7 @@ import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;
 
+/*ToDo not used in that version of webdisplay*/
 @Service(Module.class)
 public class ImmutableSynchroPeriodSerializer extends SimpleModule{
 
@@ -19,10 +20,11 @@ public class ImmutableSynchroPeriodSerializer extends SimpleModule{
         addSerializer(ImmutableSynchroPeriod.class, new JsonSerializer<ImmutableSynchroPeriod>() {
             @Override
             public void serialize(ImmutableSynchroPeriod immutableSynchroPeriod, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("period", immutableSynchroPeriod.getPeriod());
-                jsonGenerator.writeStringField("unit", immutableSynchroPeriod.getUnit());
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeStartObject();
+//                jsonGenerator.writeStringField("period", immutableSynchroPeriod.getPeriod());
+//                jsonGenerator.writeStringField("unit", immutableSynchroPeriod.getUnit());
+                jsonGenerator.writeStringField(immutableSynchroPeriod.getPeriod(), immutableSynchroPeriod.getUnit());
+            jsonGenerator.writeEndObject();
             }
         });
         addDeserializer(ImmutableSynchroPeriod.class, new JsonDeserializer<ImmutableSynchroPeriod>() {
