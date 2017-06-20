@@ -33,7 +33,7 @@ public class ImmutableFunctionalExtensionSerializer extends SimpleModule{
                 List<String> availableServices = immutableFunctionalExtension.getManagedSpecifications();
                 jsonGenerator.writeObjectFieldStart("services");
                     for(String spec : immutableFunctionalExtension.getImplementedSpecifications()){
-                        jsonGenerator.writeStringField(spec, availableServices.contains(spec)? "available":"not available");
+                        jsonGenerator.writeStringField(spec, availableServices.contains(spec)? "provided":"not provided");
                     }
                 jsonGenerator.writeEndObject();
 
@@ -49,7 +49,7 @@ public class ImmutableFunctionalExtensionSerializer extends SimpleModule{
                 String activatedConfiguration = null;
                 jsonGenerator.writeObjectFieldStart("alternative_configurations");
                     for(String config : immutableFunctionalExtension.getAlternativeConfigurations()){
-                        jsonGenerator.writeStringField(config, config.equals(activatedConfiguration)?"activated":"ToDo");
+                        jsonGenerator.writeStringField(config, config.equals(activatedConfiguration)?"activated":"not activated");
                     }
                 jsonGenerator.writeEndObject();
 
