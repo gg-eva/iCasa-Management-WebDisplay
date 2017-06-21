@@ -1,64 +1,130 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <meta charset="UTF-8"/>
-        <title>iCasa Network Status</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <script src="/assets/js/grp.v1.js"></script>
-        <script src="/assets/js/jquery-3.1.1.min.js"></script>
-        <script src="/assets/js/d3.v4.min.js"></script>
-        <link rel="stylesheet" href="/assets/css/test.css" media="screen"/>
-    </head>
-    <style>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>iCasa Network Status</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="/assets/js/grp.v1.js"></script>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/js/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/test.css" media="screen"/>
+</head>
+<style>
 
-        html, body { margin:0; padding:0; overflow:hidden }
-        svg { position:fixed; top:0; left:0; height:100%; width:100% }
-        circle:hover{
-            stroke:black;
-            stroke-width:4;
-        }
-        .a{
-            font-size:1em;
-            font-family: 'Poiret One', cursive;
-        }
-        .b{
-            font-size:0.5em;
-            fill:blue;
-            font-family: 'Poiret One', cursive;
-        }
+    html, body { margin:0; padding:0; overflow:hidden }
+    svg { position:fixed; top:0; left:0; height:100%; width:100% }
+    circle:hover{
+        stroke:black;
+        stroke-width:4;
+    }
+    .a{
+        font-size:1em;
+        font-family: 'Poiret One', cursive;
+    }
+    .b{
+        font-size:0.5em;
+        fill:blue;
+        font-family: 'Poiret One', cursive;
+    }
 
-    </style>
-    <body>
-        <div class="container">
-            <h1>Test page</h1>
+</style>
+<body>
+<div class="container">
+    <h1>Test page</h1>
 
-        </div>
-        <a href="#runtime" class="active">Runtime</a>
+</div>
+<a href="#runtime" class="active">Runtime</a>
 
-            <svg>
-            <circle cx="60" cy="60" r="30" style="fill:red;" stroke="black" stroke-width="3"></circle>
-                <rect x="90" y="30" width="200" height="60" fill="rgba(100,5,100,0.5)"></rect>
-                </svg>
-        <script src="/assets/js/erase.js"></script>
-        <script>
-            //circle.style("fill", "steelblue");
-            //circle.attr("r",30);
+<svg>
+    <circle cx="60" cy="60" r="30" style="fill:red;" stroke="black" stroke-width="3"></circle>
+    <rect x="90" y="30" width="200" height="60" fill="rgba(100,5,100,0.5)"></rect>
+</svg>
+<script src="/assets/js/erase.js"></script>
+<script>
+    //circle.style("fill", "steelblue");
+    //circle.attr("r",30);
 
-            function square(){
-                console.log("i'm the king of the world!!");
-                var svg = d3.select("body").append("svg");
+    function square(){
+        var svg = d3.select("body").append("svg");
 
-                svg.attr("width", 500);
+        svg.attr("width", 1500);
 
-                var rect = svg.append("rect")
-                    .attr("x", 50)
-                    .attr("y", 50)
-                    .attr("width", 200)
-                    .attr("height", 200)
-                    .attr("fill", "rgba(0,255,0,0.5)");
+        var rect = svg.append("rect")
+            .attr("x", 50)
+            .attr("y", 50)
+            .attr("width", 200)
+            .attr("height", 200)
+            .attr("fill", "rgba(0,255,0,0.5)");
+    }
+    square();
+</script>
+<div class="container">
+    <h1>Wisdom SPA</h1>
+    <ul></ul>
+</div>
+
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/js/bootstrap.min.js"></script>
+<script>
+    $(function() {
+        $("h1").css("color", "white").css("background-color", "green");
+        var ul = $("ul");
+        var resourcesCategories=[];
+        $.ajax({url: "/manager/resources", type: "GET"}).done(function(resources){
+            console.log("-------------------------------------RESOURCES");
+            console.log(resources);
+            console.log("------------FOR IN--RESOURCES");
+
+
+            //extract the name of the categories
+            for(var RR in resources){
+                console.log("*****1. RESOURCES???*****************************");
+                console.log(RR);
+                    for(var SS in resources[RR]){
+                        console.log("----------1.n SUB-RESOURCES???------------------------");
+                        console.log(SS);
+                            for(var TT in resources[RR][SS]){
+                                console.log("______________________1.n SUB-SUB-RESOURCES???______________");
+                                console.log(TT);
+                                console.log("value:")
+                                console.log(resources[RR][SS][TT]);
+                            }
+                    }
+                resourcesCategories.push(RR);
             }
-            square();
-        </script>
-    </body>
+
+            console.log("***************************************************");
+
+            console.log(resourcesCategories);
+            console.log("rrrr: "+ resourcesCategories);
+
+
+            console.log("-------------------------------------ENTITIES");
+            console.log(resources["Entities"]);
+            console.log(resources["Entities"].length);
+            console.log("-------------------------------------RELATIONS");
+            console.log(resources["Relations"]);
+            console.log(resources["Relations"].length);
+            console.log("PONG");
+
+            var DeviceProv = resources.Entities["fr.liglab.adele.icasa.simulator.device.provider.SimulatedDeviceProviderImpl"];
+
+            //browse categories
+            //for (var CAT in )
+
+            for (var res in DeviceProv){
+                console.log("fuzz");
+                console.log(res);
+                console.log(DeviceProv[res]);
+            }
+          //  resources.Entities.forEach(function(human) {
+               // console.log(human);
+                //ul.append("<li>"+ human.firstName+ " " + human.lastName+ "</li>");
+           // });
+        });
+    });
+
+</script>
+</body>
 </html>

@@ -1,6 +1,6 @@
 package impl;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import fr.liglab.adele.cream.administration.api.AdministrationService;
 import fr.liglab.adele.cream.administration.api.ImmutableContextEntity;
 import org.apache.felix.ipojo.annotations.Requires;
@@ -23,11 +23,11 @@ public class ContextController extends DefaultController {
 
     @Route(method = HttpMethod.GET, uri = "/manager/context")
     public Result getContext(){
-        ObjectNode result = json.newObject();
+        ArrayNode result = json.newArray();
 
         if(contextAdministrationService != null){
             for(ImmutableContextEntity entity : contextAdministrationService.getContextEntities()){
-                result.withArray("context-entities").add(json.toJson(entity));
+                result.add(json.toJson(entity));
             }
         }
 

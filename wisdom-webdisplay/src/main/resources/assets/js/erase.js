@@ -8,11 +8,11 @@ var bubbleRadius=rSize(RaC(numberOfbubbles).length);
 
 var bubbleSeparation=bubbleRadius*4;
 var coordinates=IcG(PoE(numberOfbubbles,bubbleSeparation),bubbleRadius);
-console.log(coordinates);
+//console.log(coordinates);
 
 //console.log(bubbleRadius);
 var coordinates=IcG(PoE(numberOfbubbles,bubbleSeparation),bubbleRadius);
-console.log(coordinates);
+//console.log(coordinates);
 
 var BdataX = [], BdataY = [], BdataC = [], BdataS = [],
     SdataX = [], SdataY = [], SdataC = [], SdataS = [];

@@ -22,24 +22,35 @@ public class ImmutableContextEntitySerializer extends SimpleModule{
             @Override
             public void serialize(ImmutableContextEntity immutableContextEntity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
+
+                /*Context entity instance*/
                 jsonGenerator.writeStringField("id", immutableContextEntity.getId());
-                jsonGenerator.writeStringField("state", immutableContextEntity.getState());
+                jsonGenerator.writeStringField("status", immutableContextEntity.getState());
 
-                jsonGenerator.writeArrayFieldStart("context-states");
-                for(ImmutableContextState state : immutableContextEntity.getContextStates()){
-                    jsonGenerator.writeObject(state);
-                }
-                jsonGenerator.writeEndArray();
+                /*Functional core*/
+                jsonGenerator.writeObjectFieldStart("functional_core");
+                    /*ToDo*/
+                jsonGenerator.writeStringField("name","ToDo");
 
-                jsonGenerator.writeArrayFieldStart("functional-extensions");
-                for(ImmutableFunctionalExtension extension : immutableContextEntity.getExtensions()){
-                    jsonGenerator.writeObject(extension);
-                }
-                jsonGenerator.writeEndArray();
-
-                jsonGenerator.writeArrayFieldStart("implemented-specifications");
+                    /*Context specifications - implemented*/
+                jsonGenerator.writeArrayFieldStart("services");
                 for(String spec : immutableContextEntity.getImplementedSpecifications()){
                     jsonGenerator.writeString(spec);
+                }
+                jsonGenerator.writeEndArray();
+
+                    /*Context states - without synchro (with synchro, use automatic json serialization)*/
+                jsonGenerator.writeObjectFieldStart("states");
+                for(ImmutableContextState state : immutableContextEntity.getContextStates()){
+                    jsonGenerator.writeStringField(state.getId(), state.getValue());
+                }
+                jsonGenerator.writeEndObject();
+                jsonGenerator.writeEndObject();
+
+                /*Functional extensions*/
+                jsonGenerator.writeArrayFieldStart("functional_extensions");
+                for(ImmutableFunctionalExtension extension : immutableContextEntity.getExtensions()){
+                    jsonGenerator.writeObject(extension);
                 }
                 jsonGenerator.writeEndArray();
 

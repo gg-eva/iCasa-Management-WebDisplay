@@ -11,6 +11,7 @@ import fr.liglab.adele.cream.administration.api.ImmutableFunctionalExtension;
 import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service(Module.class)
 public class ImmutableFunctionalExtensionSerializer extends SimpleModule{
@@ -21,34 +22,36 @@ public class ImmutableFunctionalExtensionSerializer extends SimpleModule{
             @Override
             public void serialize(ImmutableFunctionalExtension immutableFunctionalExtension, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
+
+                /*Functional extension*/
                 jsonGenerator.writeStringField("id", immutableFunctionalExtension.getId());
-                jsonGenerator.writeStringField("state", immutableFunctionalExtension.getState());
-                jsonGenerator.writeStringField("is-instantiate", immutableFunctionalExtension.isInstantiate());
-                jsonGenerator.writeStringField("is-mandatory", immutableFunctionalExtension.isMandatory());
+                jsonGenerator.writeStringField("mandatory", immutableFunctionalExtension.isMandatory());
+                jsonGenerator.writeStringField("instantiated", immutableFunctionalExtension.isInstantiate());
+                jsonGenerator.writeStringField("status", immutableFunctionalExtension.getState());
 
-                jsonGenerator.writeArrayFieldStart("managed-specifications");
-                for(String spec : immutableFunctionalExtension.getManagedSpecifications()){
-                    jsonGenerator.writeString(spec);
-                }
-                jsonGenerator.writeEndArray();
-
-                jsonGenerator.writeArrayFieldStart("implemented-specifications");
+                /*Context specifications*/
+                List<String> availableServices = immutableFunctionalExtension.getManagedSpecifications();
+                jsonGenerator.writeObjectFieldStart("services");
                 for(String spec : immutableFunctionalExtension.getImplementedSpecifications()){
-                    jsonGenerator.writeString(spec);
+                    jsonGenerator.writeStringField(spec, availableServices.contains(spec)? "available":"not available");
                 }
-                jsonGenerator.writeEndArray();
+                jsonGenerator.writeEndObject();
 
-                jsonGenerator.writeArrayFieldStart("alternative-configurations");
-                for(String config : immutableFunctionalExtension.getAlternativeConfigurations()){
-                    jsonGenerator.writeString(config);
-                }
-                jsonGenerator.writeEndArray();
-
-                jsonGenerator.writeArrayFieldStart("context-states");
+                /*Context states - without synchro (with synchro, use automatic json serialization)*/
+                jsonGenerator.writeObjectFieldStart("states");
                 for(ImmutableContextState state : immutableFunctionalExtension.getContextStates()){
-                    jsonGenerator.writeObject(state);
+                    jsonGenerator.writeStringField(state.getId(), state.getValue());
                 }
-                jsonGenerator.writeEndArray();
+                jsonGenerator.writeEndObject();
+
+                /*Alternative configurations*/
+                /*ToDo*/
+                String activatedConfiguration = null;
+                jsonGenerator.writeObjectFieldStart("alternative_configurations");
+                for(String config : immutableFunctionalExtension.getAlternativeConfigurations()){
+                    jsonGenerator.writeStringField(config, config.equals(activatedConfiguration)?"activated":"ToDo");
+                }
+                jsonGenerator.writeEndObject();
 
                 jsonGenerator.writeEndObject();
             }

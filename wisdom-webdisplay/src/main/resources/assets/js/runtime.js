@@ -1,8 +1,33 @@
 function runtime(){
 	document.getElementById("runtime").innerHTML = "";
 	//variable to be change for an input variable
-	var numberOfbubbles=50;			
-	
+	//var numberOfbubbles=50;
+    $.ajax({url: "http://localhost:9000/manager/context", type: "GET"}).done(function(resources){
+        NuberOfCtxtElements=resources.length;
+        var numberOfbubbles=resources.length;
+        /*console.log("________________________________________________________________________________JSON READ:");
+        console.log(resources);
+        console.log(NuberOfCtxtElements);
+        console.log("________________________________________________________________________________context entities");
+
+        JSONo=resources[1];
+        console.log(JSONo);
+
+        console.log("-------------------------------------JS VAR/");
+
+        console.log("________________________________________________________________________________JS OBJ int");
+        var  obj = JSONo["id"];
+        console.log("JSON export OK?");
+        console.log(obj);
+        console.log("-------------------------------------JS OBJ int/");
+
+        console.log("________________________________________________________________________________JSON of JSON");
+        console.log(JSONo["functional_core"]);
+        console.log("________________________________________________________________________________");
+        console.log(JSONo["functional_core"]["states"]);*/
+
+
+	console.log()
 	var bubbleRadius=rSize(RaC(numberOfbubbles).length);
 	var bubbleSeparation=bubbleRadius*4;
 	var coordinates=IcG(PoE(numberOfbubbles,bubbleSeparation),bubbleRadius);
@@ -11,7 +36,13 @@ function runtime(){
 	/* creation of empty variables to store the position of every bubble, Big and Small,
 	position: X and Y Color and Size*/
 	var BdataX = [], BdataY = [], BdataC = [], BdataS = [], 
-	SdataX = [], SdataY = [], SdataC = [], SdataS = []; 
+	SdataX = [], SdataY = [], SdataC = [], SdataS = [], Btext = [];
+
+	//gets the text for each bubble
+        for(var AA =0; AA<numberOfbubbles-1; AA++){
+           Btext[AA]= resources[AA]["id"];
+        }
+
 	var b=0, s=0;
 	//clean data for double layer draw
 	for(i=0;i<coordinates[0].length;i++){
@@ -36,10 +67,10 @@ function runtime(){
 	.style('position','absolute');
 	var svg = svg1.append("svg");
 			
-	drawC(SdataX,SdataY,SdataC,SdataS);
-	drawC(BdataX,BdataY,BdataC,BdataS);
+	drawC(SdataX,SdataY,SdataC,SdataS,"0");
+	drawC(BdataX,BdataY,BdataC,BdataS,Btext);
 	
-	function drawC(x,y,color,size){
+	function drawC(x,y,color,size,txt){
 		var ordOmain = ["A","ZZZ"];
 		var scaleX = d3.scaleOrdinal()
 		  .domain(ordOmain) //data
@@ -84,6 +115,11 @@ function runtime(){
 		  .attr("fill", colors)
 		  .attr("stroke", "black")
 		  .attr("stroke-width", 1);
+        g.selectAll("text")
+            .attr("x",scaleX)
+            .attr("y",scaleY)
+            .attr("dy",".35em")
+            .text(txt);
 			//svg.selectAll("path")
 			//		.attr()
 					}
@@ -126,6 +162,7 @@ var rect2 = svg.append("svg").selectAll("circle")
 					.attr("stroke", "black")
 					.attr("stroke-width", 1);
 			svg.selectAll("path");*/
+    });
 	}
 	
 runtime();

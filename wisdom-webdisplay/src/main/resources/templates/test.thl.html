@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>iCasa Network Status</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="/assets/js/grp.v1.js"></script>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/js/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/test.css" media="screen"/>
+</head>
+<style> /* set the CSS */
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+
+.node text { font: 12px sans-serif; }
+
+.node--internal text {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
+
+</style>
+<body>
+<script>
+console.log("first Stage OK");
+    var JSONo;
+    var jsonTXT;
+    $.ajax({url: "/manager/resources", type: "GET"}).done(function(resources){
+console.log("________________________________________________________________________________JSON READ:");
+console.log(resources);
+console.log("-------------------------------------JSON READ/:");
+        var text = '{ "employees" : [' +
+            '{ "firstName":"John" , "lastName":"Doe" },' +
+            '{ "firstName":"Anna" , "lastName":"Smith" },' +
+            '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+        jsonTXT='{'+
+            '"name": "Top Level",'+
+            '"children": ['+
+            '{'+
+            '"name": "Level 2: A",'+
+            '"children": ['+
+            '{ "name": "Son of A" },'+
+            '{ "name": "Daughter of A" }'+
+            ']'+
+            '},'+
+            '{ "name": "Level 2: B" }'+
+            ']'+
+            '}';
+
+console.log("________________________________________________________________________________JS VAR");
+
+        JSONo=resources;
+console.log(JSONo);
+console.log("-------------------------------------JS VAR/");
+
+console.log("________________________________________________________________________________JS OBJ int");
+    var  obj = JSON.parse(jsonTXT);
+console.log("JSON export OK?");
+console.log(obj);
+console.log("-------------------------------------JS OBJ int/");
+
+console.log("________________________________________________________________________________JSON of JSON");
+//    var  obj2 = JSON.parse(JSONo);
+console.log("JSON export OK?");
+//console.log(obj2);
+console.log("-------------------------------------JSON of JSON/");
+
+
+
+
+
+
+// set the dimensions and margins of the diagram
+
+var margin = {top: 20, right: 90, bottom: 30, left: 90},
+width = 660 - margin.left - margin.right,
+height = 500 - margin.top - margin.bottom;
+
+// declares a tree layout and assigns the size
+var treemap = d3.tree()
+.size([height, width]);
+
+
+
+console.log("___________________________________  1  _____________________________________________");
+    d3.json(obj function(error, treeData) {
+        console.log("___________________________________  2  _____________________________________________");
+        if (error) throw error;
+        console.log("___________________________________  3  _____________________________________________");
+        //  assigns the data to a hierarchy using parent-child relationships
+        var nodes = d3.hierarchy(treeData, function(d) {
+            return d.children;
+        });
+
+        // maps the node data to the tree layout
+        nodes = treemap(nodes);
+
+        // append the svg object to the body of the page
+        // appends a 'group' element to 'svg'
+        // moves the 'group' element to the top left margin
+        var svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom),
+            g = svg.append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+        // adds the links between the nodes
+        var link = g.selectAll(".link")
+            .data( nodes.descendants().slice(1))
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", function(d) {
+                return "M" + d.y + "," + d.x
+                    + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                    + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                    + " " + d.parent.y + "," + d.parent.x;
+            });
+
+        // adds each node as a group
+        var node = g.selectAll(".node")
+            .data(nodes.descendants())
+            .enter().append("g")
+            .attr("class", function(d) {
+                return "node" +
+                    (d.children ? " node--internal" : " node--leaf"); })
+            .attr("transform", function(d) {
+                return "translate(" + d.y + "," + d.x + ")"; });
+
+        // adds the circle to the node
+        node.append("circle")
+            .attr("r", 10);
+
+        // adds the text to the node
+        node.append("text")
+            .attr("dy", ".35em")
+            .attr("x", function(d) { return d.children ? -13 : 13; })
+            .style("text-anchor", function(d) {
+                return d.children ? "end" : "start"; })
+            .text(function(d) { return d.data.name; });
+
+
+    });
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/assets/js/erase.js"></script>
+<script>
+    //circle.style("fill", "steelblue");
+    //circle.attr("r",30);
+
+ /*   function square(){
+        var svg = d3.select("body").append("svg");
+
+        svg.attr("width", 1500);
+
+        var rect = svg.append("rect")
+            .attr("x", 50)
+            .attr("y", 50)
+            .attr("width", 200)
+            .attr("height", 200)
+            .attr("fill", "rgba(0,255,0,0.5)");
+    }
+    square();*/
+</script>
+<div class="container">
+    <h1>Wisdom SPA</h1>
+    <ul></ul>
+</div>
+
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/js/bootstrap.min.js"></script>
+
+</body>
+</html>
