@@ -17,16 +17,16 @@ import java.io.IOException;
 public class ImmutableContextStateSerializer extends SimpleModule{
 
     public ImmutableContextStateSerializer(){
+
         super("Context state serializer");
         addSerializer(ImmutableContextState.class, new JsonSerializer<ImmutableContextState>() {
             @Override
             public void serialize(ImmutableContextState immutableContextState, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
-                    jsonGenerator.writeStringField("name", immutableContextState.getId());
-                    jsonGenerator.writeStringField("value", immutableContextState.getValue());
-                    jsonGenerator.writeObjectField("synchro", immutableContextState.getSynchroPeriod());
-                jsonGenerator.writeEndObject();
-
+            jsonGenerator.writeStartObject();
+                jsonGenerator.writeStringField("name", immutableContextState.getId());
+                jsonGenerator.writeStringField("value", immutableContextState.getValue());
+                jsonGenerator.writeObjectField("synchro", immutableContextState.getSynchroPeriod());
+            jsonGenerator.writeEndObject();
             }
         });
     }
