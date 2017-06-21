@@ -1,11 +1,11 @@
 package impl;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.liglab.adele.cream.model.introspection.EntityProvider;
 import fr.liglab.adele.cream.model.introspection.RelationProvider;
-import fr.liglab.adele.icasa.context.manager.api.generic.ContextAPIConfig;
-import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
 import fr.liglab.adele.icasa.context.manager.api.web.administration.ContextManagerWebMonitoring;
+import fr.liglab.adele.icasa.context.manager.api.web.administration.GoalsByAppMonitoring;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
@@ -29,20 +29,19 @@ public class ManagerController extends DefaultController {
 
     @Route(method = HttpMethod.GET, uri = "/manager/goals")
     public Result getGoals() {
-        ObjectNode result = json.newObject();
+
+        ArrayNode result = json.newArray();
 
         if(contextManagerWebMonitoring != null){
-            for(Map.Entry<String,ContextAPIConfig> appGoal: contextManagerWebMonitoring.getGoalsByApp().entrySet()){
-                ObjectNode temp = json.newObject();
-                temp.put("app-name", appGoal.getKey());
-                temp.putArray("ctxt-api-config");
-                temp.set("ctxt-api-config", json.toJson(appGoal.getValue()));
-                result.withArray("app-goals").add(temp);
+            for(GoalsByAppMonitoring appGoal: contextManagerWebMonitoring.getGoalsByApp()){
+                result.add(json.toJson(appGoal));
             }
         }
 
         return ok(result);
     }
+
+    /*ToDo MODIFY MODELS TO BE DISPLAYED*/
 
     @Route(method = HttpMethod.GET, uri = "/manager/resources")
     public Result getResources() {

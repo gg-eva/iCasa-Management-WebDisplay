@@ -17,6 +17,7 @@ import java.io.IOException;
 public class ImmutableContextStateSerializer extends SimpleModule{
 
     public ImmutableContextStateSerializer(){
+
         super("Context state serializer");
         addSerializer(ImmutableContextState.class, new JsonSerializer<ImmutableContextState>() {
             @Override
@@ -26,7 +27,6 @@ public class ImmutableContextStateSerializer extends SimpleModule{
                 jsonGenerator.writeStringField("value", immutableContextState.getValue());
                 jsonGenerator.writeObjectField("synchro", immutableContextState.getSynchroPeriod());
                 jsonGenerator.writeEndObject();
-
             }
         });
     }

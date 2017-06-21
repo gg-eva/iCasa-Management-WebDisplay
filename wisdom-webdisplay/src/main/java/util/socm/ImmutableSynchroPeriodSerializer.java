@@ -16,6 +16,7 @@ import java.io.IOException;
 public class ImmutableSynchroPeriodSerializer extends SimpleModule{
 
     public ImmutableSynchroPeriodSerializer(){
+
         super("Synchronization period serializer");
         addSerializer(ImmutableSynchroPeriod.class, new JsonSerializer<ImmutableSynchroPeriod>() {
             @Override
@@ -27,6 +28,7 @@ public class ImmutableSynchroPeriodSerializer extends SimpleModule{
                 jsonGenerator.writeEndObject();
             }
         });
+
         addDeserializer(ImmutableSynchroPeriod.class, new JsonDeserializer<ImmutableSynchroPeriod>() {
             @Override
             public ImmutableSynchroPeriod deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

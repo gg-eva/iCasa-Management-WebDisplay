@@ -23,31 +23,14 @@ public class ImmutableContextEntitySerializer extends SimpleModule{
             public void serialize(ImmutableContextEntity immutableContextEntity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
 
-                /*Context entity instance*/
+            /*Context entity instance*/
                 jsonGenerator.writeStringField("id", immutableContextEntity.getId());
                 jsonGenerator.writeStringField("status", immutableContextEntity.getState());
 
-                /*Functional core*/
-                jsonGenerator.writeObjectFieldStart("functional_core");
-                    /*ToDo*/
-                jsonGenerator.writeStringField("name","ToDo");
+            /*Functional core*/
+                jsonGenerator.writeObjectField("functional_core", immutableContextEntity.getCore());
 
-                    /*Context specifications - implemented*/
-                jsonGenerator.writeArrayFieldStart("services");
-                for(String spec : immutableContextEntity.getImplementedSpecifications()){
-                    jsonGenerator.writeString(spec);
-                }
-                jsonGenerator.writeEndArray();
-
-                    /*Context states - without synchro (with synchro, use automatic json serialization)*/
-                jsonGenerator.writeObjectFieldStart("states");
-                for(ImmutableContextState state : immutableContextEntity.getContextStates()){
-                    jsonGenerator.writeStringField(state.getId(), state.getValue());
-                }
-                jsonGenerator.writeEndObject();
-                jsonGenerator.writeEndObject();
-
-                /*Functional extensions*/
+            /*Functional extensions*/
                 jsonGenerator.writeArrayFieldStart("functional_extensions");
                 for(ImmutableFunctionalExtension extension : immutableContextEntity.getExtensions()){
                     jsonGenerator.writeObject(extension);

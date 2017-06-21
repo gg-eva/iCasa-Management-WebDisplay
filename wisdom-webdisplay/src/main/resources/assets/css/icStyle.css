@@ -178,6 +178,16 @@ svg {
 	padding:1em;
 	margin:1em;
 }
+
+.idtitle{
+	position:relative;
+	width:60%;
+	background:#2179FE;
+	font-size: 100%;
+	padding:1em;
+	color:white;
+}
+
 .col1,
 .col3 {
 	float:left;
@@ -205,14 +215,7 @@ svg {
 	left:6%;			/* (right column left and right padding) plus (left column left padding) */
 }
 
-.idtitle{
-	position:relative;
-	width:60%;
-	background:#2179FE;
-	font-size: 100%;
-	padding:1em;
-	color:white;
-}
+
 .functionalExtensions li a{
 	display:inline-block;
 	padding-left:0.5em;
