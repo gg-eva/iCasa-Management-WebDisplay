@@ -28,25 +28,25 @@ public class ImmutableCoreSerializer extends SimpleModule {
 
                 /*Context specifications - implemented*/
                 jsonGenerator.writeArrayFieldStart("services");
-                for(String spec : immutableCore.getImplementedSpecifications()){
-                    jsonGenerator.writeString(spec);
-                }
+                    for(String spec : immutableCore.getImplementedSpecifications()){
+                        jsonGenerator.writeString(spec);
+                    }
                 jsonGenerator.writeEndArray();
 
                 /*Context states - without synchro (with synchro, use automatic json serialization)*/
                 jsonGenerator.writeObjectFieldStart("states");
-                for(ImmutableContextState state : immutableCore.getContextStates()){
-                    jsonGenerator.writeStringField(state.getId(), state.getValue());
-                }
+                    for(ImmutableContextState state : immutableCore.getContextStates()){
+                        jsonGenerator.writeStringField(state.getId(), state.getValue());
+                    }
                 jsonGenerator.writeEndObject();
 
                 /*Relations*/
                 jsonGenerator.writeArrayFieldStart("connections");
-                for(ImmutableRelation relation : immutableCore.getRelations()){
-                    for(String id : relation.getSourcesId()){
-                        jsonGenerator.writeString(id);
+                    for(ImmutableRelation relation : immutableCore.getRelations()){
+                        for(String id : relation.getSourcesId()){
+                            jsonGenerator.writeString(id);
+                        }
                     }
-                }
                 jsonGenerator.writeEndArray();
 
                 jsonGenerator.writeEndObject();

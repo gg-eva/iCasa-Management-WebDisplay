@@ -22,11 +22,11 @@ public class ImmutableContextStateSerializer extends SimpleModule{
         addSerializer(ImmutableContextState.class, new JsonSerializer<ImmutableContextState>() {
             @Override
             public void serialize(ImmutableContextState immutableContextState, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
+            jsonGenerator.writeStartObject();
                 jsonGenerator.writeStringField("name", immutableContextState.getId());
                 jsonGenerator.writeStringField("value", immutableContextState.getValue());
                 jsonGenerator.writeObjectField("synchro", immutableContextState.getSynchroPeriod());
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
             }
         });
     }

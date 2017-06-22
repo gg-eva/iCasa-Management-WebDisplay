@@ -21,11 +21,11 @@ public class ImmutableSynchroPeriodSerializer extends SimpleModule{
         addSerializer(ImmutableSynchroPeriod.class, new JsonSerializer<ImmutableSynchroPeriod>() {
             @Override
             public void serialize(ImmutableSynchroPeriod immutableSynchroPeriod, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
+            jsonGenerator.writeStartObject();
 //                jsonGenerator.writeStringField("period", immutableSynchroPeriod.getPeriod());
 //                jsonGenerator.writeStringField("unit", immutableSynchroPeriod.getUnit());
                 jsonGenerator.writeStringField(immutableSynchroPeriod.getPeriod(), immutableSynchroPeriod.getUnit());
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
             }
         });
 

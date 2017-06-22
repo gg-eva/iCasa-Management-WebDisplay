@@ -23,47 +23,47 @@ public class ImmutableFunctionalExtensionSerializer extends SimpleModule{
         addSerializer(ImmutableFunctionalExtension.class, new JsonSerializer<ImmutableFunctionalExtension>() {
             @Override
             public void serialize(ImmutableFunctionalExtension immutableFunctionalExtension, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
+            jsonGenerator.writeStartObject();
 
             /*Functional extension*/
-                jsonGenerator.writeStringField("id", immutableFunctionalExtension.getId());
-                jsonGenerator.writeStringField("mandatory", immutableFunctionalExtension.isMandatory());
-                jsonGenerator.writeStringField("instantiated", immutableFunctionalExtension.isInstantiate());
-                jsonGenerator.writeStringField("status", immutableFunctionalExtension.getState());
+            jsonGenerator.writeStringField("id", immutableFunctionalExtension.getId());
+            jsonGenerator.writeStringField("mandatory", immutableFunctionalExtension.isMandatory());
+            jsonGenerator.writeStringField("instantiated", immutableFunctionalExtension.isInstantiate());
+            jsonGenerator.writeStringField("status", immutableFunctionalExtension.getState());
 
             /*Context specifications*/
-                List<String> availableServices = immutableFunctionalExtension.getManagedSpecifications();
-                jsonGenerator.writeObjectFieldStart("services");
+            List<String> availableServices = immutableFunctionalExtension.getManagedSpecifications();
+            jsonGenerator.writeObjectFieldStart("services");
                 for(String spec : immutableFunctionalExtension.getImplementedSpecifications()){
                     jsonGenerator.writeStringField(spec, availableServices.contains(spec)? "provided":"not provided");
                 }
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
 
             /*Context states - without synchro (with synchro, use automatic json serialization)*/
-                jsonGenerator.writeObjectFieldStart("states");
+            jsonGenerator.writeObjectFieldStart("states");
                 for(ImmutableContextState state : immutableFunctionalExtension.getContextStates()){
                     jsonGenerator.writeStringField(state.getId(), state.getValue());
                 }
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
 
             /*Relations*/
-                jsonGenerator.writeArrayFieldStart("connections");
+            jsonGenerator.writeArrayFieldStart("connections");
                 for(ImmutableRelation relation : immutableFunctionalExtension.getRelations()){
                     for(String id : relation.getSourcesId()){
                         jsonGenerator.writeString(id);
                     }
                 }
-                jsonGenerator.writeEndArray();
+            jsonGenerator.writeEndArray();
 
             /*Alternative configurations*/
-                String activatedConfiguration = immutableFunctionalExtension.getSelectedImplementation();
-                jsonGenerator.writeObjectFieldStart("alternative_configurations");
+            String activatedConfiguration = immutableFunctionalExtension.getSelectedImplementation();
+            jsonGenerator.writeObjectFieldStart("alternative_configurations");
                 for(String config : immutableFunctionalExtension.getAlternativeConfigurations()){
                     jsonGenerator.writeStringField(config, config.equals(activatedConfiguration)?"activated":"not activated");
                 }
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
 
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
             }
         });
     }

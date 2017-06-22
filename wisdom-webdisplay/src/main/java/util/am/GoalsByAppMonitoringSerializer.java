@@ -23,13 +23,13 @@ public class GoalsByAppMonitoringSerializer extends SimpleModule{
             public void serialize(GoalsByAppMonitoring goalsByAppMonitoring, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
                     throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("app_name", goalsByAppMonitoring.getApp());
-                jsonGenerator.writeObjectFieldStart("context_api_config");
-                for(Map.Entry<ContextAPIEnum, Boolean> state : goalsByAppMonitoring.getGoals().entrySet()){
-                    jsonGenerator.writeStringField(state.getKey().getInterfaceName(),
-                            state.getValue()?"provided":"not provided");
-                }
-                jsonGenerator.writeEndObject();
+                    jsonGenerator.writeStringField("app_name", goalsByAppMonitoring.getApp());
+                    jsonGenerator.writeObjectFieldStart("context_api_config");
+                        for(Map.Entry<ContextAPIEnum, Boolean> state : goalsByAppMonitoring.getGoals().entrySet()){
+                            jsonGenerator.writeStringField(state.getKey().getInterfaceName(),
+                                    state.getValue()?"provided":"not provided");
+                        }
+                    jsonGenerator.writeEndObject();
                 jsonGenerator.writeEndObject();
             }
         });

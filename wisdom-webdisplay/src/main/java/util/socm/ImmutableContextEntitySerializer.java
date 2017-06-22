@@ -21,23 +21,23 @@ public class ImmutableContextEntitySerializer extends SimpleModule{
         addSerializer(ImmutableContextEntity.class, new JsonSerializer<ImmutableContextEntity>() {
             @Override
             public void serialize(ImmutableContextEntity immutableContextEntity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-                jsonGenerator.writeStartObject();
+            jsonGenerator.writeStartObject();
 
             /*Context entity instance*/
-                jsonGenerator.writeStringField("id", immutableContextEntity.getId());
-                jsonGenerator.writeStringField("status", immutableContextEntity.getState());
+            jsonGenerator.writeStringField("id", immutableContextEntity.getId());
+            jsonGenerator.writeStringField("status", immutableContextEntity.getState());
 
             /*Functional core*/
-                jsonGenerator.writeObjectField("functional_core", immutableContextEntity.getCore());
+            jsonGenerator.writeObjectField("functional_core", immutableContextEntity.getCore());
 
             /*Functional extensions*/
-                jsonGenerator.writeArrayFieldStart("functional_extensions");
-                for(ImmutableFunctionalExtension extension : immutableContextEntity.getExtensions()){
-                    jsonGenerator.writeObject(extension);
-                }
-                jsonGenerator.writeEndArray();
+            jsonGenerator.writeArrayFieldStart("functional_extensions");
+            for(ImmutableFunctionalExtension extension : immutableContextEntity.getExtensions()){
+                jsonGenerator.writeObject(extension);
+            }
+            jsonGenerator.writeEndArray();
 
-                jsonGenerator.writeEndObject();
+            jsonGenerator.writeEndObject();
             }
         });
     }

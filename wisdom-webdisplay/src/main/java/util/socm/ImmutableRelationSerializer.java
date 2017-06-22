@@ -22,12 +22,12 @@ public class ImmutableRelationSerializer extends SimpleModule {
             @Override
             public void serialize(ImmutableRelation immutableRelation, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("name-ToDo", immutableRelation.getState());
-                jsonGenerator.writeArrayFieldStart("ids");
-                for(String source : immutableRelation.getSourcesId()){
-                    jsonGenerator.writeString(source);
-                }
-                jsonGenerator.writeEndArray();
+                    jsonGenerator.writeStringField("name-ToDo", immutableRelation.getState());
+                    jsonGenerator.writeArrayFieldStart("ids");
+                        for(String source : immutableRelation.getSourcesId()){
+                            jsonGenerator.writeString(source);
+                        }
+                    jsonGenerator.writeEndArray();
                 jsonGenerator.writeEndObject();
             }
         });

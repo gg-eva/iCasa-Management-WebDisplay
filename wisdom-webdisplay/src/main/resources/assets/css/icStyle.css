@@ -145,7 +145,7 @@ svg {
 #services .link{
 	fill:none;
 	stroke: #948DC2;
-	stroke-width=1.5px;
+	stroke-width:1.5px;
 }
 #services .g{
 	color: green;
