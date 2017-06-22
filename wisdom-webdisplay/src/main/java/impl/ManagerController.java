@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.liglab.adele.cream.model.introspection.EntityProvider;
 import fr.liglab.adele.cream.model.introspection.RelationProvider;
+import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.ContextAPIConfig;
+import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.GoalModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
 import fr.liglab.adele.icasa.context.manager.api.web.administration.ContextManagerWebMonitoring;
-import fr.liglab.adele.icasa.context.manager.api.web.administration.GoalsByAppMonitoring;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
@@ -13,6 +15,7 @@ import org.wisdom.api.annotations.Route;
 import org.wisdom.api.content.Json;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
+import util.am.MonitoredGoal;
 
 import java.util.Map;
 import java.util.Set;
@@ -22,19 +25,27 @@ import java.util.Set;
 public class ManagerController extends DefaultController {
 
     @Requires
-    Json json;
+    @SuppressWarnings("unused")
+    private Json json;
 
     @Requires(optional = true)
+    @SuppressWarnings("unused")
     private ContextManagerWebMonitoring contextManagerWebMonitoring;
+
+    @Requires(optional = true)
+    @SuppressWarnings("unused")
+    private GoalModelAccess goalModel;
 
     @Route(method = HttpMethod.GET, uri = "/manager/goals")
     public Result getGoals() {
 
         ArrayNode result = json.newArray();
 
-        if(contextManagerWebMonitoring != null){
-            for(GoalsByAppMonitoring appGoal: contextManagerWebMonitoring.getGoalsByApp()){
-                result.add(json.toJson(appGoal));
+        if(goalModel != null){
+            for(Map.Entry<String, ContextAPIConfig> goalByApp: goalModel.getGoalsByApp().entrySet()){
+                String app = goalByApp.getKey();
+                Map<ContextAPIEnum, Boolean> value = goalModel.getGoalsStateForApp(app);
+                result.add(json.toJson(new MonitoredGoal(app, value)));
             }
         }
 
