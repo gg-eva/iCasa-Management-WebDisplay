@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.liglab.adele.cream.model.introspection.EntityProvider;
 import fr.liglab.adele.cream.model.introspection.RelationProvider;
+import fr.liglab.adele.icasa.context.manager.api.generic.models.ExternalFilterModelAccess;
 import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.ContextAPIConfig;
 import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.GoalModelAccess;
 import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
@@ -35,6 +36,10 @@ public class ManagerController extends DefaultController {
     @Requires(optional = true)
     @SuppressWarnings("unused")
     private GoalModelAccess goalModel;
+
+    @Requires
+    @SuppressWarnings("unused")
+    private ExternalFilterModelAccess externalFilterModel;
 
     @Route(method = HttpMethod.GET, uri = "/manager/goals")
     public Result getGoals() {
@@ -138,12 +143,12 @@ public class ManagerController extends DefaultController {
 
 
     @Route(method = HttpMethod.GET, uri = "/manager/filters")
-    public Result getEntityProviders() {
-        ObjectNode result = json.newObject();
+    public Result getExternalFilter() {
+        ArrayNode result = json.newArray();
 
-        if(contextManagerWebMonitoring != null){
-            for(String filter: contextManagerWebMonitoring.getCurrentLookupFilter()){
-                result.withArray("filters").add(filter);
+        if(externalFilterModel != null){
+            for(String service: externalFilterModel.getLookupFilter()){
+                result.add(service);
             }
         }
 
