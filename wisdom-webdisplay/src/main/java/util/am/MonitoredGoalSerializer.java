@@ -7,25 +7,24 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
-import fr.liglab.adele.icasa.context.manager.api.web.administration.GoalsByAppMonitoring;
 import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;
 import java.util.Map;
 
 @Service(Module.class)
-public class GoalsByAppMonitoringSerializer extends SimpleModule{
+public class MonitoredGoalSerializer extends SimpleModule{
 
-    public GoalsByAppMonitoringSerializer(){
-        super("Goals By App Monitoring serializer");
-        addSerializer(GoalsByAppMonitoring.class, new JsonSerializer<GoalsByAppMonitoring>() {
+    public MonitoredGoalSerializer(){
+        super("Monitored goal serializer");
+        addSerializer(MonitoredGoal.class, new JsonSerializer<MonitoredGoal>() {
             @Override
-            public void serialize(GoalsByAppMonitoring goalsByAppMonitoring, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            public void serialize(MonitoredGoal monitoredGoal, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
                     throws IOException, JsonProcessingException {
                 jsonGenerator.writeStartObject();
-                    jsonGenerator.writeStringField("app_name", goalsByAppMonitoring.getApp());
+                    jsonGenerator.writeStringField("app_name", monitoredGoal.getApp());
                     jsonGenerator.writeObjectFieldStart("context_api_config");
-                        for(Map.Entry<ContextAPIEnum, Boolean> state : goalsByAppMonitoring.getGoals().entrySet()){
+                        for(Map.Entry<ContextAPIEnum, Boolean> state : monitoredGoal.getGoals().entrySet()){
                             jsonGenerator.writeStringField(state.getKey().getInterfaceName(),
                                     state.getValue()?"provided":"not provided");
                         }
