@@ -2,7 +2,7 @@ function setActiveLink(fragmentId){
 			  var navbarDiv = document.getElementById("mainNav"),
 			      links = navbarDiv.children,
 			      i, link, pageName;
-			      console.log(links);
+			     // console.log(links);
 			  for(i = 0; i < links.length; i++){
 			    link = links[i];
 			    pageName = link.getAttribute("href").substr(1);
