@@ -89,7 +89,7 @@ public class ManagerController extends DefaultController {
                 EntityProvider provider = entry.getKey();
                 for(String item : entry.getValue()){
                     String creatorName = Util.creatorName(provider, item);
-                    entities.put(creatorName, capabilityModel.getInstancesByCreator(creatorName).toString());
+                    entities.put(item, capabilityModel.getInstancesByCreator(creatorName).toString());
                 }
                 String providerName = provider.getName();
                 entityProviders.putObject(providerName);
@@ -105,7 +105,7 @@ public class ManagerController extends DefaultController {
                 RelationProvider provider = entry.getKey();
                 for(String item : entry.getValue()){
                     String creatorName = Util.creatorName(provider, item);
-                    entities.put(creatorName, capabilityModel.getInstancesByCreator(creatorName).toString());
+                    entities.put(item, capabilityModel.getInstancesByCreator(creatorName).toString());
                 }
                 String providerName = provider.getName();
                 relationProviders.putObject(providerName);
