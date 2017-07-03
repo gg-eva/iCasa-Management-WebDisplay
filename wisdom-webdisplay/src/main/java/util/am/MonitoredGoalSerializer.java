@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
+import fr.liglab.adele.icasa.context.manager.api.config.ContextAPIEnum;
 import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;

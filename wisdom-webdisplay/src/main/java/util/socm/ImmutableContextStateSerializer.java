@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.liglab.adele.cream.administration.api.ImmutableContextState;
-import fr.liglab.adele.cream.administration.api.ImmutableSynchroPeriod;
 import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;

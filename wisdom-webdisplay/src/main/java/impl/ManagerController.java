@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.liglab.adele.cream.annotations.provider.OriginEnum;
 import fr.liglab.adele.cream.model.introspection.EntityProvider;
 import fr.liglab.adele.cream.model.introspection.RelationProvider;
-import fr.liglab.adele.icasa.context.manager.api.generic.Util;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.CapabilityModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.ExternalFilterModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.ContextAPIConfig;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.GoalModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
+import fr.liglab.adele.icasa.context.manager.api.Util;
+import fr.liglab.adele.icasa.context.manager.api.models.CapabilityModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.models.ExternalModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.models.goals.ContextAPIConfig;
+import fr.liglab.adele.icasa.context.manager.api.models.goals.GoalModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.config.ContextAPIEnum;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
@@ -41,7 +41,7 @@ public class ManagerController extends DefaultController {
 
     @Requires(optional = true)
     @SuppressWarnings("unused")
-    private ExternalFilterModelAccess externalFilterModel;
+    private ExternalModelAccess externalModel;
 
 
     @Route(method = HttpMethod.GET, uri = "/manager/goals")
@@ -123,8 +123,8 @@ public class ManagerController extends DefaultController {
     public Result getExternalFilter() {
         ArrayNode result = json.newArray();
 
-        if(externalFilterModel != null){
-            for(String service: externalFilterModel.getLookupFilter()){
+        if(externalModel != null){
+            for(String service: externalModel.getLookupFilter()){
                 result.add(service);
             }
         }

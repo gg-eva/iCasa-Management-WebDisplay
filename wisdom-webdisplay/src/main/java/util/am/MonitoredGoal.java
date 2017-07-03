@@ -1,6 +1,6 @@
 package util.am;
 
-import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
+import fr.liglab.adele.icasa.context.manager.api.config.ContextAPIEnum;
 
 import java.util.Map;
 
