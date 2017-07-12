@@ -1,4 +1,4 @@
-package util.am;
+package fr.liglab.adele.icasa.webdisplay.util.am;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;

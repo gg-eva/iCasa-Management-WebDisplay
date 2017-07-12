@@ -1,4 +1,4 @@
-package util.am;
+package fr.liglab.adele.icasa.webdisplay.util.am;
 
 import fr.liglab.adele.cream.annotations.provider.OriginEnum;
 

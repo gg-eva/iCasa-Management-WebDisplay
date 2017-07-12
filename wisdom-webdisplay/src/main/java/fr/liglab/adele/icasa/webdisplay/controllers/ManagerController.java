@@ -1,4 +1,4 @@
-package impl;
+package fr.liglab.adele.icasa.webdisplay.controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,13 +18,14 @@ import org.wisdom.api.annotations.Route;
 import org.wisdom.api.content.Json;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
-import util.am.MonitoredGoal;
+import fr.liglab.adele.icasa.webdisplay.util.am.MonitoredGoal;
 
 import java.util.Map;
 import java.util.Set;
 
 
 @Controller
+@SuppressWarnings("unused")
 public class ManagerController extends DefaultController {
 
     @Requires
@@ -60,19 +61,19 @@ public class ManagerController extends DefaultController {
         return ok(result);
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/internal")
     public Result getInternalCapabilities(){
         return ok(getCapabilities(OriginEnum.internal));
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/local")
     public Result getLocalCapabilities(){
         return ok(getCapabilities(OriginEnum.local));
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/remote")
     public Result getRemoteCapabilities(){
         return ok(getCapabilities(OriginEnum.remote));

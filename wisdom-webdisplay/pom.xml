@@ -105,7 +105,43 @@
         <!--iCasa dependencies-->
         <dependency>
             <groupId>fr.liglab.adele.icasa</groupId>
+            <artifactId>common.metrics</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa</groupId>
             <artifactId>context.manager.api</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa.apps</groupId>
+            <artifactId>demo.configurator.application</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa.apps</groupId>
+            <artifactId>demo.ligth.follow.me.application</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa.apps</groupId>
+            <artifactId>demo.pet.care.application</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa.apps</groupId>
+            <artifactId>demo.fall.detection.application</artifactId>
+            <version>${icasa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.liglab.adele.icasa.apps</groupId>
+            <artifactId>demo.fire.alarm.application</artifactId>
             <version>${icasa.version}</version>
         </dependency>
 
@@ -113,12 +149,6 @@
         <dependency>
             <groupId>fr.liglab.adele.cream</groupId>
             <artifactId>cream.core</artifactId>
-            <version>${cream.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.liglab.adele.cream</groupId>
-            <artifactId>cream.runtime.facilities</artifactId>
             <version>${cream.version}</version>
         </dependency>
 
