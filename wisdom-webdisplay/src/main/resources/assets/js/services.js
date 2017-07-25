@@ -1,4 +1,4 @@
-servs();
+
 function servs(){
 	//document.getElementById("services").innerHTML = "";
 	var margin = {top: 20, right: 300, bottom: 230, left: 90},
@@ -7,6 +7,45 @@ function servs(){
 	// declares a tree layout and assigns the size
 	var treemap = d3.tree()
 	  .size([height, width]);
+
+    //console.log("-------------------------services bgn V1--------------------------------------------------");
+
+
+    $.ajax({url: "http://localhost:9000/apps", type: "GET"}).done(function(resource){
+    	//console.log("hey y'all");
+    	//console.log(resource.length);
+     //   console.log(resource);
+    	for (var i =0;i<resource.length;i++){
+          //  console.log(resource[i]);
+        }
+
+    });
+
+  //  console.log("-------------------------services end--------------------------------------------------");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*  d3.json("/manager/contex", function(error, treeData) {
 	  if (error) throw error;
 
@@ -62,3 +101,6 @@ function servs(){
 	    .text(function(d) { return d.data.name; });
 	});*/
 }
+
+
+servs();

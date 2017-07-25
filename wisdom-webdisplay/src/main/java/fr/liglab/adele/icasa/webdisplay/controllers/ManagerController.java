@@ -1,16 +1,16 @@
-package impl;
+package fr.liglab.adele.icasa.webdisplay.controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.liglab.adele.cream.annotations.provider.OriginEnum;
 import fr.liglab.adele.cream.model.introspection.EntityProvider;
 import fr.liglab.adele.cream.model.introspection.RelationProvider;
-import fr.liglab.adele.icasa.context.manager.api.generic.Util;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.CapabilityModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.ExternalFilterModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.ContextAPIConfig;
-import fr.liglab.adele.icasa.context.manager.api.generic.models.goals.GoalModelAccess;
-import fr.liglab.adele.icasa.context.manager.api.specific.ContextAPIEnum;
+import fr.liglab.adele.icasa.context.manager.api.Util;
+import fr.liglab.adele.icasa.context.manager.api.models.CapabilityModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.models.ExternalModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.models.goals.ContextAPIConfig;
+import fr.liglab.adele.icasa.context.manager.api.models.goals.GoalModelAccess;
+import fr.liglab.adele.icasa.context.manager.api.config.ContextAPIEnum;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
@@ -18,13 +18,14 @@ import org.wisdom.api.annotations.Route;
 import org.wisdom.api.content.Json;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
-import util.am.MonitoredGoal;
+import fr.liglab.adele.icasa.webdisplay.util.am.MonitoredGoal;
 
 import java.util.Map;
 import java.util.Set;
 
 
 @Controller
+@SuppressWarnings("unused")
 public class ManagerController extends DefaultController {
 
     @Requires
@@ -41,7 +42,7 @@ public class ManagerController extends DefaultController {
 
     @Requires(optional = true)
     @SuppressWarnings("unused")
-    private ExternalFilterModelAccess externalFilterModel;
+    private ExternalModelAccess externalModel;
 
 
     @Route(method = HttpMethod.GET, uri = "/manager/goals")
@@ -60,19 +61,19 @@ public class ManagerController extends DefaultController {
         return ok(result);
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/internal")
     public Result getInternalCapabilities(){
         return ok(getCapabilities(OriginEnum.internal));
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/local")
     public Result getLocalCapabilities(){
         return ok(getCapabilities(OriginEnum.local));
     }
 
-    /*ToDo*/
+
     @Route(method = HttpMethod.GET, uri = "/manager/capabilities/remote")
     public Result getRemoteCapabilities(){
         return ok(getCapabilities(OriginEnum.remote));
@@ -89,7 +90,7 @@ public class ManagerController extends DefaultController {
                 EntityProvider provider = entry.getKey();
                 for(String item : entry.getValue()){
                     String creatorName = Util.creatorName(provider, item);
-                    entities.put(creatorName, capabilityModel.getInstancesByCreator(creatorName).toString());
+                    entities.put(item, capabilityModel.getInstancesByCreator(creatorName).toString());
                 }
                 String providerName = provider.getName();
                 entityProviders.putObject(providerName);
@@ -105,7 +106,7 @@ public class ManagerController extends DefaultController {
                 RelationProvider provider = entry.getKey();
                 for(String item : entry.getValue()){
                     String creatorName = Util.creatorName(provider, item);
-                    entities.put(creatorName, capabilityModel.getInstancesByCreator(creatorName).toString());
+                    entities.put(item, capabilityModel.getInstancesByCreator(creatorName).toString());
                 }
                 String providerName = provider.getName();
                 relationProviders.putObject(providerName);
@@ -123,8 +124,8 @@ public class ManagerController extends DefaultController {
     public Result getExternalFilter() {
         ArrayNode result = json.newArray();
 
-        if(externalFilterModel != null){
-            for(String service: externalFilterModel.getLookupFilter()){
+        if(externalModel != null){
+            for(String service: externalModel.getLookupFilter()){
                 result.add(service);
             }
         }

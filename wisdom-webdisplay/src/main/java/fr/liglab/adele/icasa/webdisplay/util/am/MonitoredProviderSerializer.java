@@ -1,4 +1,4 @@
-package util.am;
+package fr.liglab.adele.icasa.webdisplay.util.am;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,6 +10,7 @@ import org.wisdom.api.annotations.Service;
 
 import java.io.IOException;
 
+/*ToDo*/
 @Service(Module.class)
 public class MonitoredProviderSerializer extends SimpleModule{
     public MonitoredProviderSerializer(){

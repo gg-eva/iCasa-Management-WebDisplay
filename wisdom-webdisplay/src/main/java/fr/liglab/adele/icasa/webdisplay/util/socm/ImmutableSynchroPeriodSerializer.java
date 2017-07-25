@@ -1,4 +1,4 @@
-package util.socm;
+package fr.liglab.adele.icasa.webdisplay.util.socm;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

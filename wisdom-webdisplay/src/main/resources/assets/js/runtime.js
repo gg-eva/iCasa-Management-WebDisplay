@@ -7,17 +7,32 @@ function runtime(){
 		var bubbleSeparation=bubbleRadius*5;
 		var coordinates=IcG(PoE(numberOfbubbles,bubbleSeparation),bubbleRadius);
 		var b=0, s=0,Bubbles=[],BubbleBig=[],bubbleSmall=[];
+		var bubbleInfo=[];
+		var lines=[];
+		var lineindex=0;
 		//fill the bubble info except the coordinates, color and radius.
         for(i=0;i<numberOfbubbles;i++){
+            var A=resources[i]["functional_extensions"][0];
+            if (A!=undefined){
+                A=A["connections"];
+            }else{
+                A=[];
+            }
+
             BubbleBig[i]={
                 id:resources[i]["id"],
                 status:resources[i]["status"],
                 functionalCore:resources[i]["functional_core"],
-                functionalExtensions:resources[i]["functional_extensions"]
+                functionalExtensions:resources[i]["functional_extensions"],
+                con1:resources[i]["functional_core"].connections,
+                con2:A
             };
         }
         BubbleBig.sort(sortObj);
 
+
+
+console.log("********************************");
         for(i=0;i<coordinates[0].length;i++){
             if((i+1)%5==0 ){//multiples of 5 (big bubble)
                 BubbleBig[b].x=coordinates[0][i];
@@ -75,6 +90,39 @@ function runtime(){
             }
         }
 
+        for(var i=0;i<BubbleBig.length;i++){
+            bubbleInfo[i]=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
+        }
+        function findcoordinates(name){
+            for(var a=0;a<bubbleInfo.length;a++){
+                if(bubbleInfo[a][0]==name){
+                    return [bubbleInfo[a][1],bubbleInfo[a][2]];
+                }
+            }
+        }
+
+        for(var i=0;i<BubbleBig.length;i++){
+            console.log(BubbleBig[i].con1);
+            if(BubbleBig[i].con1.length>0){//if an element has functional core
+                for(p=0;p<BubbleBig[i].con1.length;p++){//loop though them
+                    lines[lineindex]=[{x1:BubbleBig[i].x,y1:BubbleBig[i].y,x2:findcoordinates(BubbleBig[i].con1[p])[0],y2:findcoordinates(BubbleBig[i].con1[p])[1],stroke:"rgb(102,102,102)","strokewidth":6}];
+                    lineindex+=1;
+                }
+            }
+            //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
+        }
+        for(var i=0;i<BubbleBig.length;i++){
+            console.log(BubbleBig[i].con2);
+            if(BubbleBig[i].con2.length>0){//if an element has functional core
+                for(p=0;p<BubbleBig[i].con2.length;p++){//loop though them
+                    lines[lineindex]=[{x1:BubbleBig[i].x,y1:BubbleBig[i].y,x2:findcoordinates(BubbleBig[i].con2[p])[0],y2:findcoordinates(BubbleBig[i].con2[p])[1],stroke:"rgb(254,166,33)","strokewidth":1}];
+                    lineindex+=1;
+                }
+            }
+            //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
+        }
+        console.log(lines);
+
 		svg1
 		.attr("class","contextMap")
 		.style('position','absolute');
@@ -106,8 +154,40 @@ function runtime(){
 
         });
         svg.call(tip);
-
+        lines.forEach(drawL);
 		drawC(Bubbles);
+
+
+
+
+
+
+
+
+
+        function drawL(data) {
+            var wid = PageWidth/2;
+            var hei = 5*PageHeight/12;
+            console.log(wid+"<wid hei>"+hei);
+            var screenElem=svg.selectAll("g")
+                .data(data,function(d){console.log(d); } );
+            var elemEnter = screenElem.enter()
+                .append("g")
+                .attr("transform", function(d){return "translate("+(d.x+wid)+","+(d.y+(hei*3/4))+")";});
+
+            var lain = svg.append("line")
+                .data(data)
+                .attr("x1", function(d){return d.x1+wid;})
+                .attr("y1", function(d){return d.y1+(hei*3/4);})
+                .attr("x2", function(d){return d.x2+wid;})
+                .attr("y2", function(d){return d.y2+(hei*3/4);})
+                .attr("stroke", function(d){return d.stroke;})
+                .attr("stroke-width", function(d){return d.strokewidth;});
+        }
+
+
+
+
 
 		function drawC(data){
 			var wid = PageWidth/2;
@@ -117,6 +197,26 @@ function runtime(){
             var elemEnter = screenElem.enter()
                 .append("g")
                 .attr("transform", function(d){return "translate("+(d.x+wid)+","+(d.y+(hei*3/4))+")";});
+            var ldata=[
+                {x:631,y:535},
+                {x:831,y:735}
+            ];
+            var line = d3.line()
+                .x(function (d){return d.x;})
+                .y(function (d){return d.y;});
+
+            var lines = elemEnter.append("path")
+                .data([ldata])
+                .enter()
+                .append("path")
+                .attr("d",line)
+                .attr("fill","none")
+                .attr("stroke","#000")
+                .attr("stroke-width",5);
+            console.log("line????")
+            console.log(lines);
+
+
             var circle = elemEnter.append("circle")
                 .attr("r", function(d){return d.radius;} )
                 .attr("stroke","black")
@@ -128,12 +228,15 @@ function runtime(){
                     .text(function(d){return d.id;});
             circle.on("click", function(d){
                 console.log(d);
+                console.log(d.con1.length+": "+d.con1);
+                console.log(d.con2.length+": "+d.con2);
                 document.getElementById('infop').innerHTML = '<div class="idtitle">id: '+d.id+'</div>';
                 d3.select(this)
                     .transition()
                     .duration(500)
                     .style("background","lightblue");
             })
+
 						}
 		});
 	}
