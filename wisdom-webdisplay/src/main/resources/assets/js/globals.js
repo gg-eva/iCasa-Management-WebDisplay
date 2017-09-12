@@ -50,5 +50,6 @@ function ajaxGETshow(url){
             console.log(resource[t].app_name +resource[t].registered);
         }
         alert(mesOut);
+        urlResponse(resource);
     });
 }

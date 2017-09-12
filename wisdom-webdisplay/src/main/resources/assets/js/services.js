@@ -134,6 +134,15 @@ $("#lightid").on('keyup', function (e) {
     }
 });
 
+$("#zone").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        //console.log();
+        var jobValue = "http://localhost:9000/env/zones/add/"+e.target.value;
+
+        ajaxGET(jobValue);
+    }
+});
+
 $("#loczone").on('keyup', function (e) {
     if (e.keyCode == 13) {
         //console.log();
@@ -143,11 +152,4 @@ $("#loczone").on('keyup', function (e) {
     }
 });
 
-$("#zone").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-        //console.log();
-        var jobValue = "http://localhost:9000/env/zones/add/"+e.target.value;
 
-        ajaxGET(jobValue);
-    }
-});
