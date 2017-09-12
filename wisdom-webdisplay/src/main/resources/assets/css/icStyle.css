@@ -273,7 +273,8 @@ svg {
 	float:left;
 	width:100%;
 	border-top:1px solid #000;
-	background:#5681B5;
+	background:#000000;
+	color:#ffffff;
 }
 #footer p {
 	padding:10px;

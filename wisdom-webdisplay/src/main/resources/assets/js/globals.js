@@ -37,13 +37,18 @@ function urlResponse(bar){
 
 function ajaxGET(url){
     $.ajax({url: url, type: "GET"}).done(function(resource){
-        for (var i =0;i<resource.length;i++){
-            console.log(resource[i]);
-        }
         urlResponse(resource);
     });
 }
 
-function toogleA(){
-    console.log("toogle AAAAAA!!!");
+function ajaxGETshow(url){
+    $.ajax({url: url, type: "GET"}).done(function(resource){
+        var mesOut="";
+        for(var t=0;t<resource.length;t++){
+           // alert(mesOut);
+            mesOut = mesOut + resource[t].app_name +": "+resource[t].registered+"; ";
+            console.log(resource[t].app_name +resource[t].registered);
+        }
+        alert(mesOut);
+    });
 }
