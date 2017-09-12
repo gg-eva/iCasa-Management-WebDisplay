@@ -7,7 +7,7 @@ var svg2 = d3.select("#context");
 var PageWidth = window.innerWidth;
 var PageHeight = window.innerHeight;
 
-//var myVar = setInterval(reDraw, 3000);
+var myVar = setInterval(reDraw, 3000);
 
 function reDraw(){
 	PageWidth = window.innerWidth;
