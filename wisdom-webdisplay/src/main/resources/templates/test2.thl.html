@@ -8,6 +8,7 @@
     <script src="/assets/js/jquery-3.1.1.min.js"></script>
     <script src="/assets/js/d3.v4.min.js"></script>
     <script src="/assets/js/d3.tip.v0.6.3.js"></script>
+    <script src="/assets/js/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="/assets/css/icStyle.css" media="screen"/>
 </head>
 <body>
@@ -18,7 +19,8 @@
         <a href="#context">Context</a>
         <a href="#services">Services</a>
     </div>
-    <p id="menuoptions">Available apps: <a href="total.html">remote</a> | <a href="local.htm">Local</a> | <strong>Total</strong></p>
+    <p id="menuoptions"></p>
+
 </div>
 
 
@@ -45,7 +47,30 @@
     </div>
 </div>
 
-<div id="footer">
+<div id="footer" class="btn-group">
+
+    <script>
+        $(function(){
+            $("#accordion").accordion();
+        });
+    </script>
+    <button class="button" type="button" onclick="ajaxGET('http://localhost:9000/apps/toggle/demo-light-follow-me');">demo-light-follow-me</button>
+    <button class="button" onclick="ajaxGET('http://localhost:9000/apps/toggle/demo-pet-care');">demo-pet-care</button>
+    button id:
+    <input id="btnid" type="text" ></input>
+    light id:
+    <input id ="lightid" type="text" ></input>
+    zone-id:
+    <input type="text" id="zone"></input>
+    location zone/element_id:
+    <input type="text" id="loczone"></input>
+
+
+
+
+
+
+
     <div>
         <div>
             <script src="/assets/js/globals.js">//set the global layout</script>

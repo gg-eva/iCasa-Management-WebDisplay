@@ -102,7 +102,6 @@ console.log("********************************");
         }
 
         for(var i=0;i<BubbleBig.length;i++){
-            console.log(BubbleBig[i].con1);
             if(BubbleBig[i].con1.length>0){//if an element has functional core
                 for(p=0;p<BubbleBig[i].con1.length;p++){//loop though them
                     lines[lineindex]=[{x1:BubbleBig[i].x,y1:BubbleBig[i].y,x2:findcoordinates(BubbleBig[i].con1[p])[0],y2:findcoordinates(BubbleBig[i].con1[p])[1],stroke:"rgb(102,102,102)","strokewidth":6}];
@@ -112,7 +111,6 @@ console.log("********************************");
             //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
         }
         for(var i=0;i<BubbleBig.length;i++){
-            console.log(BubbleBig[i].con2);
             if(BubbleBig[i].con2.length>0){//if an element has functional core
                 for(p=0;p<BubbleBig[i].con2.length;p++){//loop though them
                     lines[lineindex]=[{x1:BubbleBig[i].x,y1:BubbleBig[i].y,x2:findcoordinates(BubbleBig[i].con2[p])[0],y2:findcoordinates(BubbleBig[i].con2[p])[1],stroke:"rgb(254,166,33)","strokewidth":1}];
@@ -121,7 +119,6 @@ console.log("********************************");
             }
             //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
         }
-        console.log(lines);
 
 		svg1
 		.attr("class","contextMap")

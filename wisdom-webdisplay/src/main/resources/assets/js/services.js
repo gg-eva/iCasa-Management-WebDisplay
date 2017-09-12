@@ -10,21 +10,31 @@ function servs(){
 
     //console.log("-------------------------services bgn V1--------------------------------------------------");
 
+var test1=[];
 
-    $.ajax({url: "http://localhost:9000/apps", type: "GET"}).done(function(resource){
-    	//console.log("hey y'all");
-    	//console.log(resource.length);
-     //   console.log(resource);
-    	for (var i =0;i<resource.length;i++){
-          //  console.log(resource[i]);
-        }
+    function urlResponse(bar){
+        test1=bar;
+        console.log(test1);
+    }
 
-    });
+    ajaxGET("http://localhost:9000/apps");
+
+    function ajaxGET(url){
+        $.ajax({url: url, type: "GET"}).done(function(resource){
+            for (var i =0;i<resource.length;i++){
+                console.log("***** ** ** *****");
+                console.log(resource[i]);
+            }
+            urlResponse(resource);
+        });
+    }
+
 
   //  console.log("-------------------------services end--------------------------------------------------");
 
 
-
+  //  console.log("+++ ++ ++ +++");
+  //  console.log(test1);
 
 
 
@@ -104,3 +114,40 @@ function servs(){
 
 
 servs();
+
+
+$("#btnid").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        //console.log();
+        var jobValue = "http://localhost:9000/env/buttons/add/"+e.target.value;
+
+        ajaxGET(jobValue);
+    }
+});
+
+$("#lightid").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        //console.log();
+        var jobValue = "http://localhost:9000/env/lights/add/"+e.target.value;
+
+        ajaxGET(jobValue);
+    }
+});
+
+$("#loczone").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        //console.log();
+        var jobValue = "http://localhost:9000/env/locations/add/"+e.target.value;
+
+        ajaxGET(jobValue);
+    }
+});
+
+$("#zone").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        //console.log();
+        var jobValue = "http://localhost:9000/env/zones/add/"+e.target.value;
+
+        ajaxGET(jobValue);
+    }
+});
