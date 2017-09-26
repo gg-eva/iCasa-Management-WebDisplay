@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en" profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon"
+          type="image/png"
+          href="http://localhost:9000/assets/favicon.png"></link>
+    <meta charset="UTF-8"/>
+    <title>iCasa Network Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="/assets/js/grp.v1.js"></script>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/js/d3.v4.min.js"></script>
+    <script src="/assets/js/d3.tip.v0.6.3.js"></script>
+    <script src="/assets/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/icStyle.css" media="screen"/>
+</head>
+<body>
+<div id="header">
+    <h1>iCasa network visualization</h1>
+    <div id="mainNav">
+        <a href="#runtime" class="active">Runtime</a>
+        <a href="#context">Context</a>
+        <a href="#services">Services</a>
+    </div>
+    <p id="menuoptions"></p>
+
+</div>
+
+
+
+<div id="content">
+    <div class="infopanel" id="infop">
+        <div class="idtitle">id: string</div>
+        <div class="functionalCore">functional core: context impl</div>
+        <div class="functionalExtensions">
+            <ul> functional extensions
+                <li>ext 1</li>
+                <li>ext 2</li>
+                <li>ext 3</li>
+            </ul>
+        </div>
+        <div>use: context use</div>
+        <div>origin</div>
+
+    </div>
+    <div id="runtime">runtime...</div>
+    <div id="context">context...</div>
+    <div id="services">services...
+
+    </div>
+</div>
+
+<div id="footer" class="btn-group">
+
+    <script>
+        $(function(){
+            $("#accordion").accordion();
+        });
+    </script>
+    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps');">apps</button>
+    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps/toggle/demo-light-follow-me');">demo-light-follow-me</button>
+    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps/toggle/demo-pet-care');">demo-pet-care</button>
+    button id:
+    <input id="btnid" type="text" ></input>
+    light id:
+    <input id ="lightid" type="text" ></input>
+    zone-id:
+    <input type="text" id="zone"></input>
+    location zone/element_id:
+    <input type="text" id="loczone"></input>
+
+
+
+
+
+
+
+    <div>
+        <div>
+            <script src="/assets/js/globals.js">//set the global layout</script>
+            <script src="/assets/js/runtime.js">//bubble party</script>
+            <script src="/assets/js/context.js"></script>
+            <script src="/assets/js/services.js">//tree</script>
+            <script src="/assets/js/navigation.js">//navigation</script>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
