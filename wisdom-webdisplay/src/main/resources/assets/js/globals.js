@@ -1,9 +1,6 @@
 var svg1 = d3.select("#runtime");
 var svg3 = d3.select("#services");
 var svg2 = d3.select("#context");
-/*			.append("svg")
-			.attr("width", 250)
-			.attr("height", 200);*/
 var PageWidth = window.innerWidth;
 var PageHeight = window.innerHeight;
 
@@ -33,8 +30,6 @@ function urlResponse(bar){
     console.log(bar);
 }
 
-
-
 function ajaxGET(url){
     $.ajax({url: url, type: "GET"}).done(function(resource){
         urlResponse(resource);
@@ -47,7 +42,7 @@ function ajaxGETshow(url){
         for(var t=0;t<resource.length;t++){
            // alert(mesOut);
             mesOut = mesOut + resource[t].app_name +": "+resource[t].registered+"; ";
-            console.log(resource[t].app_name +resource[t].registered);
+            //console.log(resource[t].app_name +resource[t].registered);
         }
         alert(mesOut);
         urlResponse(resource);

@@ -30,9 +30,6 @@ function runtime(){
         }
         BubbleBig.sort(sortObj);
 
-
-
-console.log("********************************");
         for(i=0;i<coordinates[0].length;i++){
             if((i+1)%5==0 ){//multiples of 5 (big bubble)
                 BubbleBig[b].x=coordinates[0][i];
@@ -108,7 +105,6 @@ console.log("********************************");
                     lineindex+=1;
                 }
             }
-            //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
         }
         for(var i=0;i<BubbleBig.length;i++){
             if(BubbleBig[i].con2.length>0){//if an element has functional core
@@ -117,13 +113,13 @@ console.log("********************************");
                     lineindex+=1;
                 }
             }
-            //a=[BubbleBig[i].id, BubbleBig[i].x, BubbleBig[i].y];
         }
 
 		svg1
 		.attr("class","contextMap")
 		.style('position','absolute');
 		var svg = svg1.append("svg");
+        d3.select(".d3-tip").remove();
         tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
             //console.log(d);
             if (d.color=="rgb(190,137,74)"){//brown
@@ -154,37 +150,23 @@ console.log("********************************");
         lines.forEach(drawL);
 		drawC(Bubbles);
 
-
-
-
-
-
-
-
-
         function drawL(data) {
+            //console.log(data);
             var wid = PageWidth/2;
             var hei = 5*PageHeight/12;
-            console.log(wid+"<wid hei>"+hei);
+            //console.log(wid+"<wid hei>"+hei);
             var screenElem=svg.selectAll("g")
-                .data(data,function(d){console.log(d); } );
-            var elemEnter = screenElem.enter()
-                .append("g")
-                .attr("transform", function(d){return "translate("+(d.x+wid)+","+(d.y+(hei*3/4))+")";});
+                .data(data,function(d){/*console.log(d);*/ } );
 
             var lain = svg.append("line")
                 .data(data)
                 .attr("x1", function(d){return d.x1+wid;})
-                .attr("y1", function(d){return d.y1+(hei*3/4);})
+                .attr("y1", function(d){return d.y1+(hei);})
                 .attr("x2", function(d){return d.x2+wid;})
-                .attr("y2", function(d){return d.y2+(hei*3/4);})
+                .attr("y2", function(d){return d.y2+(hei);})
                 .attr("stroke", function(d){return d.stroke;})
                 .attr("stroke-width", function(d){return d.strokewidth;});
         }
-
-
-
-
 
 		function drawC(data){
 			var wid = PageWidth/2;
@@ -193,7 +175,7 @@ console.log("********************************");
                 .data(data,function(d){/*console.log(d);*/ } );
             var elemEnter = screenElem.enter()
                 .append("g")
-                .attr("transform", function(d){return "translate("+(d.x+wid)+","+(d.y+(hei*3/4))+")";});
+                .attr("transform", function(d){return "translate("+(d.x+wid)+","+(d.y+(hei))+")";});
             var ldata=[
                 {x:631,y:535},
                 {x:831,y:735}
@@ -210,9 +192,6 @@ console.log("********************************");
                 .attr("fill","none")
                 .attr("stroke","#000")
                 .attr("stroke-width",5);
-            console.log("line????")
-            console.log(lines);
-
 
             var circle = elemEnter.append("circle")
                 .attr("r", function(d){return d.radius;} )

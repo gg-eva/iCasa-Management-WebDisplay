@@ -22,11 +22,16 @@
         <a href="#context">Context</a>
         <a href="#services">Services</a>
     </div>
-    <p id="menuoptions"></p>
+    <p id="menuoptions">-Button id:
+        <input id="btnid" type="text" ></input>
+        -Light id:
+        <input id ="lightid" type="text" ></input>
+        -Zone-id:
+        <input type="text" id="zone"></input>
+        -Location zone/element_id:
+        <input type="text" id="loczone"></input></p>
 
 </div>
-
-
 
 <div id="content">
     <div class="infopanel" id="infop">
@@ -51,29 +56,14 @@
 </div>
 
 <div id="footer" class="btn-group">
-
     <script>
         $(function(){
             $("#accordion").accordion();
         });
     </script>
-    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps');">apps</button>
-    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps/toggle/demo-light-follow-me');">demo-light-follow-me</button>
-    <button class="button" type="button" onclick="ajaxGETshow('http://localhost:9000/apps/toggle/demo-pet-care');">demo-pet-care</button>
-    button id:
-    <input id="btnid" type="text" ></input>
-    light id:
-    <input id ="lightid" type="text" ></input>
-    zone-id:
-    <input type="text" id="zone"></input>
-    location zone/element_id:
-    <input type="text" id="loczone"></input>
 
 
-
-
-
-
+    demo-light-follow-me<label class="switch">  <span class="slider round"></span></label>
 
     <div>
         <div>
@@ -85,16 +75,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
