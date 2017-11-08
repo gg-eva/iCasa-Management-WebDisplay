@@ -8,15 +8,6 @@ function servs(){
 	var treemap = d3.tree()
 	  .size([height, width]);
 
-    //console.log("-------------------------services bgn V1--------------------------------------------------");
-
-var apps=[];
-
-    function urlResponse(bar){
-        apps=bar;
-        //console.log(apps);
-    }
-
     ajaxGET("http://localhost:9000/apps");
 
     function ajaxGET(url){
@@ -30,7 +21,6 @@ var apps=[];
                 }
 
             }
-            urlResponse(resource);
         });
     }
 }

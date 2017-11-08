@@ -4,7 +4,7 @@ var svg2 = d3.select("#context");
 var PageWidth = window.innerWidth;
 var PageHeight = window.innerHeight;
 
-var myVar = setInterval(reDraw, 3000);
+//var myVar = setInterval(reDraw, 3000);
 
 function reDraw(){
 	PageWidth = window.innerWidth;
@@ -44,7 +44,13 @@ function ajaxGETshow(url){
             mesOut = mesOut + resource[t].app_name +": "+resource[t].registered+"; ";
             //console.log(resource[t].app_name +resource[t].registered);
         }
-        alert(mesOut);
-        urlResponse(resource);
+        if(mesOut.length!=0){
+            alert(mesOut);
+            urlResponse(resource);
+        }else{
+            alert("no apps found");
+            urlResponse("no apps found");
+        }
+
     });
 }

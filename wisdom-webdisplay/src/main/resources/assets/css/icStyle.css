@@ -175,7 +175,7 @@ svg {
 }
 .infopanel{
 	z-index:1;
-	height:30em;
+	width:20em;
 	float:left;
 	position:relative;
 	padding:0 0 1em 0;
@@ -183,11 +183,13 @@ svg {
 	background:#f4f4f4;
 	padding:1em;
 	margin:1em;
+	display: none;
+	word-wrap: break-word;
 }
 
 .idtitle{
 	position:relative;
-	width:60%;
+	width:80%;
 	background:#2179FE;
 	font-size: 100%;
 	padding:1em;

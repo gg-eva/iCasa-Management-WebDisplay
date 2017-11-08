@@ -1,4 +1,4 @@
-package impl;
+package fr.liglab.adele.icasa.webdisplay.controllers;
 
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
